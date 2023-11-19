@@ -5,8 +5,6 @@ from tkinter.messagebox import showinfo
 import datetime
 import sys
 import random
-import customtkinter
-import packaging
 #SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
 
@@ -14,8 +12,7 @@ BAUDRATE = 9600
 
 #ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1)
 
-root = customtkinter.CTk()
-customtkinter.set_default_color_theme("green") # Themes: "blue", "green", "dark-blue"
+root = tk.Tk()
 root.geometry('1000x500')
 root.resizable(True, True)
 root.title('Troop 30 Food Drive Weigh Station')
@@ -184,81 +181,78 @@ def Tare_The_Scale():
 
     
     
-btnSaveToFile = customtkinter.CTkButton(
+btnSaveToFile = tk.Button(
             root,text = "Save To File",
             font=("Helvetica", 60),command = write_to_file,)
 
 btnSaveToFile.grid(row = 4, column = 2, columnspan = 1, rowspan = 3)
 
-btnTare = customtkinter.CTkButton(
+btnTare = tk.Button(
             root,text = "Tare",
             font=("Helvetica", 20),command = Tare_The_Scale)
 
 btnTare.grid(row = 3, column = 2, columnspan = 1, rowspan = 3)
 
 
-label1 = customtkinter.CTkLabel(
+label1 = tk.Label(
         root,
         textvariable=(weight_to_display),
-        font=("Helvetica", 200),
-        width = 100)
+        font=("Helvetica", 200))
 
 label1.grid(row = 0, column = 0,columnspan = 3,rowspan = 3)
       
         
-label2 = customtkinter.CTkLabel(
+label2 = tk.Label(
         root,
         textvariable=(Bigtotal),
         font=("Helvetica", 60))
 
 label2.grid(row = 3, column = 2,columnspan = 1,rowspan = 1)       
         
-label3 = customtkinter.CTkLabel(
+label3 = tk.Label(
         root,
         text=("200 lbs. maxiumum on scale."),
         font=("Helvetica", 40))
 
-label3.grid(row = 5, column = 1,columnspan = 1,rowspan = 1)
+label3.grid(row = 3, column = 1,columnspan = 1,rowspan = 1)
 
 
-NameEntry = customtkinter.CTkEntry(root,
+NameEntry = tk.Entry(root,text = "boy",
                      textvariable  = scout,
-                     font=("Helvetica", 60),
-                     width = 300,
-                     height = 60)
+                     font=("Helvetica", 60))
 
-NameEntry.grid(row = 4,column = 1,columnspan=1,rowspan = 3,)
+NameEntry.grid(row = 4,column = 1,columnspan=1,rowspan = 3)
 
 
 
     
 
-r1 = customtkinter.CTkRadioButton(root, text='Scout', font=("Helvetica", 20), value='Scout', variable=ScoutType)
-r1.grid(row = 3, column = 0, rowspan =1) 
+r1 = tk.Radiobutton(root, text='Scout', font=("Helvetica", 20), value='Scout', variable=ScoutType)
+r1.grid(row = 3, column = 0) 
 
-r2 = customtkinter.CTkRadioButton(root, text='Webelo', font=("Helvetica", 20), value='Webelo', variable=ScoutType)
-r2.grid(row = 4, column = 0, rowspan = 1) 
+r2 = tk.Radiobutton(root, text='Webelo', font=("Helvetica", 20), value='Webelo', variable=ScoutType)
+r2.grid(row = 4, column = 0) 
 
-r3 = customtkinter.CTkRadioButton(root, text='Other', font=("Helvetica", 20), value='Other', variable=ScoutType)
-r3.grid(row = 5, column = 0, rowspan = 1)
+r3 = tk.Radiobutton(root, text='Other', font=("Helvetica", 20), value='Other', variable=ScoutType)
+r3.grid(row = 5, column = 0)
 
 def adjust_font_size(event=None):
     # Calculate a new font size based on the window width and height
     new_font_size = int((root.winfo_width() + root.winfo_height()) // 50)  # Adjust this formula as needed
     
     # Set the new font size for all relevant widgets
-    btnSaveToFile.configure(font=("Helvetica", int(new_font_size // 1.5)))
-    btnTare.configure(font=("Helvetica", new_font_size // 1.5))
-    label1.configure(font=("Helvetica", new_font_size))
-    label2.configure(font=("Helvetica", new_font_size))
-    label3.configure(font=("Helvetica", int(new_font_size // 1.3)))
-    NameEntry.configure(font=("Helvetica", new_font_size))
-    r1.configure(font=("Helvetica", new_font_size // 2))
-    r2.configure(font=("Helvetica", new_font_size // 2))
-    r3.configure(font=("Helvetica", new_font_size // 2))
+    btnSaveToFile.config(font=("Helvetica", int(new_font_size // 1.5)))
+    btnTare.config(font=("Helvetica", new_font_size // 2))
+    label1.config(font=("Helvetica", new_font_size))
+    label2.config(font=("Helvetica", new_font_size))
+    label3.config(font=("Helvetica", int(new_font_size // 1.3)))
+    NameEntry.config(font=("Helvetica", new_font_size))
+    r1.config(font=("Helvetica", new_font_size // 4))
+    r2.config(font=("Helvetica", new_font_size // 4))
+    r3.config(font=("Helvetica", new_font_size // 4))
 
 def my_mainloop():
-    #print("Main Loop")
+    print("Main Loop")
     
     #weight= get_serial("0") #Real Weight
     weight= random.randint(1,110) #Fake weight
@@ -266,13 +260,12 @@ def my_mainloop():
     #data0 = data0 + " lbs."
     weight_to_display.set(data0 + " lbs.")
     
-    #print("weight_to_display = "+ data0 )
+    print("weight_to_display = "+ data0 )
         
     root.after(1000, my_mainloop)
     
     
 root.after(1000, my_mainloop)
-
 
 adjust_font_size(0)
 root.bind("<Configure>", adjust_font_size)
