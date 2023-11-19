@@ -4,6 +4,7 @@ from tkinter.ttk import Label
 from tkinter.messagebox import showinfo
 import datetime
 import sys
+import random
 #SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
 
@@ -12,7 +13,7 @@ BAUDRATE = 9600
 #ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1)
 
 root = tk.Tk()
-root.geometry('2000x1000')
+root.geometry('1000x500')
 root.resizable(True, True)
 root.title('Troop 30 Food Drive Weigh Station')
 
@@ -149,14 +150,14 @@ def write_to_file():
     
         hs.close
         
-        scout.set("")
+        scout.set(ScoutName)
         
         
         
     
         showinfo(
             title='Saved',
-            message=ScoutName+' thank you for your '+weight_to_file+' lbs. donation!'
+            message=ScoutName+', thank you for your '+weight_to_file+' lbs. donation!'
             )
         
             
@@ -254,7 +255,7 @@ def my_mainloop():
     print("Main Loop")
     
     #weight= get_serial("0") #Real Weight
-    weight= 58 #Fake weight
+    weight= random.randint(1,110) #Fake weight
     data0 = str(weight)
     #data0 = data0 + " lbs."
     weight_to_display.set(data0 + " lbs.")
