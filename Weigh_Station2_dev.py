@@ -7,6 +7,7 @@ import sys
 import random
 import customtkinter
 import packaging
+from CTkMessagebox import CTkMessagebox
 #SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
 
@@ -156,21 +157,11 @@ def write_to_file():
         
         scout.set(ScoutName)
         
-        
-        
-    
-        showinfo(
-            title='Saved',
-            message=ScoutName+', thank you for your '+weight_to_file+' lbs. donation!'
-            )
+        CTkMessagebox(title="Saved", message=ScoutName+', thank you for your '+weight_to_file+' lbs. donation!')
         
             
-    else:
-        showinfo(
-            title='Error not saved',
-            message='Please Name The '+ ScoutTypeDisplay
-            
-            )
+    else:            
+        CTkMessagebox(title="Error, Not saved", message='Please Name The '+ ScoutTypeDisplay, icon="cancel")
         
         
 def Tare_The_Scale():
