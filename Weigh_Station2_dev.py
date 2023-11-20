@@ -15,6 +15,7 @@ BAUDRATE = 9600
 #ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1)
 
 root = customtkinter.CTk()
+customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("green") # Themes: "blue", "green", "dark-blue"
 root.geometry('1000x500')
 root.resizable(True, True)
