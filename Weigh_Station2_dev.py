@@ -1,12 +1,12 @@
 import tkinter as tk
-import serial,time
+#import serial,time
 from tkinter.ttk import Label
 from tkinter.messagebox import showinfo
 import datetime
 import sys
 import random
 import customtkinter
-import packaging
+#import packaging
 from CTkMessagebox import CTkMessagebox
 #SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
