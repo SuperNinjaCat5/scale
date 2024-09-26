@@ -1,5 +1,5 @@
 import tkinter as tk
-#import serial,time
+import serial, time
 from tkinter.ttk import Label
 from tkinter.messagebox import showinfo
 import datetime
@@ -8,12 +8,12 @@ import random
 import customtkinter
 #import packaging
 from CTkMessagebox import CTkMessagebox
-#SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
-SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
+SERIALPORT = "COM6" #"/dev/ttyUSB0"  #Real Sparfun Open Scale
+#SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
 
 BAUDRATE = 9600
 
-#ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1)
+ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1)
 
 root = customtkinter.CTk()
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -41,53 +41,53 @@ ScoutType.set("Scout")
 Bigtotal = tk.StringVar(root)
 Bigtotal.set("0")
 
-#def get_serial(StringToSend):
-#    print("StringToSend = "+StringToSend)
-#    weight_string = ""
-#    weight = 00.0
-#    miliseconds = 0
-#    Data_Ready = 0
-#    
-#    ser.reset_input_buffer()
-#    ser.reset_output_buffer()
-#    
-#    #ser.write(bytearray("W",'ascii'))
-#    ser.write(StringToSend.encode('utf-8'))
-#    
-#    #time.sleep(.1)
-#    while (Data_Ready == 0):
-#        Data_Ready = ser.inWaiting()
-#        pass
-#    
-#    input_string =""
-#    
-#    input_string = ser.readline().decode('utf-8')
-#    print (input_string)
-#    
-#    try:
-#        split_input_string = input_string.split(",")
-#        print("weight splitting")
-#        print (split_input_string[0])
-#        print (split_input_string[1])
-#        weight_string = split_input_string[0]
-#        weight_string = weight_string.rstrip()
-#        weight_string = weight_string.rstrip('lbs')
-#        
-#        print("weight_string = "+ weight_string)
-#        weight = float(weight_string)
-#        
-#        print("weight = "+ str(weight))
-#        
-#        #miliseconds_string = split_input_string[0].strip()
-#        #miliseconds = int(miliseconds_string)
-#        
-#        print("milliseconds = " + str(miliseconds))
-#              
-#        return weight
-#        
-#    except:
-#        print("Not Weight Data")
-#        print (split_input_string[0])
+def get_serial(StringToSend):
+    print("StringToSend = "+StringToSend)
+    weight_string = ""
+    weight = 00.0
+    miliseconds = 0
+    Data_Ready = 0
+    
+    ser.reset_input_buffer()
+    ser.reset_output_buffer()
+    
+    #ser.write(bytearray("W",'ascii'))
+    ser.write(StringToSend.encode('utf-8'))
+    
+    #time.sleep(.1)
+    while (Data_Ready == 0):
+        Data_Ready = ser.inWaiting()
+        pass
+    
+    input_string =""
+    
+    input_string = ser.readline().decode('utf-8')
+    print (input_string)
+    
+    try:
+        split_input_string = input_string.split(",")
+        print("weight splitting")
+        print (split_input_string[0])
+        print (split_input_string[1])
+        weight_string = split_input_string[0]
+        weight_string = weight_string.rstrip()
+        weight_string = weight_string.rstrip('lbs')
+        
+        print("weight_string = "+ weight_string)
+        weight = float(weight_string)
+        
+        print("weight = "+ str(weight))
+        
+        #miliseconds_string = split_input_string[0].strip()
+        #miliseconds = int(miliseconds_string)
+        
+        print("milliseconds = " + str(miliseconds))
+              
+        return weight
+        
+    except:
+        print("Not Weight Data")
+        print (split_input_string[0])
         
     
    
@@ -252,8 +252,8 @@ def adjust_font_size(event=None):
 def my_mainloop():
     #print("Main Loop")
     
-    #weight= get_serial("0") #Real Weight
-    weight= random.randint(1,110) #Fake weight
+    weight= get_serial("0") #Real Weight
+    #weight= random.randint(1,110) #Fake weight
     data0 = str(weight)
     #data0 = data0 + " lbs."
     weight_to_display.set(data0 + " lbs.")
