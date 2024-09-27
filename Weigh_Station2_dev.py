@@ -126,7 +126,7 @@ def write_to_file():
     if ScoutName != "":
 
         #hs = open("/home/pi/Desktop/Food_Pantry_Donations.csv","a") #RPI400
-        hs = open("C:/Users/nicos/Documents/Food_Pantry_Donations.csv.txt","a") #Laptop
+        hs = open("C:/Users/nicos/Documents/Food_Pantry_Donations.csv","a") #Laptop
         ct = datetime.datetime.now()
         
         hs.write(ScoutName)
