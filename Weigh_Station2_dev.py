@@ -17,7 +17,7 @@ BAUDRATE = 9600
 
 root = customtkinter.CTk()
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
-customtkinter.set_default_color_theme("green") # Themes: "blue", "green", "dark-blue"
+customtkinter.set_default_color_theme("dark-blue") # Themes: "blue", "green", "dark-blue"
 root.geometry('1000x500')
 root.resizable(True, True)
 root.title('Troop 30 Food Drive Weigh Station')
