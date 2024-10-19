@@ -9,12 +9,15 @@ import customtkinter
 #import packaging
 from CTkMessagebox import CTkMessagebox
 import csv
-#SERIALPORT = "COM6" #"/dev/ttyUSB0"  #Real Sparfun Open Scale
+SERIALPORT = "COM6" #"/dev/ttyUSB0"  #Real Sparfun Open Scale
 #SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
+
+# TODO
+# 
 
 BAUDRATE = 9600
 
-#ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1) #Real scale
+ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1) #Real scale
 
 root = customtkinter.CTk()
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -42,57 +45,57 @@ ScoutType.set("Scout")
 Bigtotal = tk.StringVar(root)
 Bigtotal.set("0")
 
-# def get_serial(StringToSend):
-#     print("StringToSend = "+StringToSend)
-#     weight_string = ""
-#     weight = 00.0
-#     miliseconds = 0
-#     Data_Ready = 0
+def get_serial(StringToSend):
+    print("StringToSend = "+StringToSend)
+    weight_string = ""
+    weight = 00.0
+    miliseconds = 0
+    Data_Ready = 0
     
-#     ser.reset_input_buffer()
-#     ser.reset_output_buffer()
+    ser.reset_input_buffer()
+    ser.reset_output_buffer()
     
-#     #ser.write(bytearray("W",'ascii'))
-#     ser.write(StringToSend.encode('utf-8'))
+    #ser.write(bytearray("W",'ascii'))
+    ser.write(StringToSend.encode('utf-8'))
     
-#     #time.sleep(.1)
-#     while (Data_Ready == 0):
-#         Data_Ready = ser.inWaiting()
-#         pass
+    #time.sleep(.1)
+    while (Data_Ready == 0):
+        Data_Ready = ser.inWaiting()
+        pass
     
-#     input_string =""
+    input_string =""
     
-#     input_string = ser.readline().decode('utf-8')
-#     print (input_string)
+    input_string = ser.readline().decode('utf-8')
+    print (input_string)
     
-#     try:
-#         split_input_string = input_string.split(",")
-#         print("weight splitting")
-#         print (split_input_string[0])
-#         print (split_input_string[1])
-#         weight_string = split_input_string[0]
-#         weight_string = weight_string.rstrip()
-#         weight_string = weight_string.rstrip('lbs')
+    try:
+        split_input_string = input_string.split(",")
+        print("weight splitting")
+        print (split_input_string[0])
+        print (split_input_string[1])
+        weight_string = split_input_string[0]
+        weight_string = weight_string.rstrip()
+        weight_string = weight_string.rstrip('lbs')
         
-#         print("weight_string = "+ weight_string)
-#         weight = float(weight_string)
+        print("weight_string = "+ weight_string)
+        weight = float(weight_string)
         
-#         print("weight = "+ str(weight))
+        print("weight = "+ str(weight))
         
-#         #miliseconds_string = split_input_string[0].strip()
-#         #miliseconds = int(miliseconds_string)
+        #miliseconds_string = split_input_string[0].strip()
+        #miliseconds = int(miliseconds_string)
         
-#         print("milliseconds = " + str(miliseconds))
+        print("milliseconds = " + str(miliseconds))
               
-#         return weight
+        return weight
         
-#     except:
-#         print("Not Weight Data")
-#         print (split_input_string[0])
+    except:
+        print("Not Weight Data")
+        print (split_input_string[0])
         
-def get_serial(StringToSend): #Dummy scale
-    weight = random.randint(0,200)
-    return weight    
+# def get_serial(StringToSend): #Dummy scale
+#     weight = random.randint(0,200)
+#     return weight    
    
 
 
