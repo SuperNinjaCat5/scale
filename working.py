@@ -4,17 +4,22 @@ import datetime
 import customtkinter
 from CTkMessagebox import CTkMessagebox
 import serial
+from PIL import Image
+
 
 SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 #SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
-
-# TODO
-# 
 
 BAUDRATE = 9600
 
 filename="./Food_Pantry_Donations.csv"
 ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1) #Real scale
+
+open(filename, "a")
+
+logo = customtkinter.CTkImage(light_image=Image.open("./Boy_Scouts_of_America_corporate_trademark.png"),
+                                  dark_image=Image.open("./Boy_Scouts_of_America_corporate_trademark.png"),
+                                  size=(150, 150))
 
 root = customtkinter.CTk()
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -61,11 +66,14 @@ def get_serial(StringToSend):
     
     #ser.write(bytearray("W",'ascii'))
     ser.write(StringToSend.encode('utf-8'))
-    
+    i=0
     #time.sleep(.1)
     while (Data_Ready == 0):
         Data_Ready = ser.inWaiting()
-        pass
+        i=i+1
+        if i>10:
+            print("I BROKE!")
+            break
     
     input_string =""
     
@@ -181,6 +189,8 @@ r3 = customtkinter.CTkRadioButton(
 )
 r3.grid(row=5, column=0, rowspan=1)
 
+image_label = customtkinter.CTkLabel(root, image=logo, text="")  # display image with a CTkLabel
+image_label.grid(row=0, column=0, rowspan=1)
 
 # Adjust font size dynamically without flickering
 current_font_size = 0  # Store the current font size
@@ -207,14 +217,13 @@ last_weight = None  # Store the last weight
 
 def my_mainloop():
     global last_weight
-    weight = get_serial("0")  # Simulated or real weight
+    weight = get_serial("W")  # Simulated or real weight
     if weight != last_weight:
         last_weight = weight
         weight_to_display.set(f"{weight} lbs.")
-    root.after(1000, my_mainloop)
+    root.after(500, my_mainloop)
 
-
-root.after(1000, my_mainloop)
+root.after(500, my_mainloop)
 adjust_font_size(0)
 root.bind("<Configure>", adjust_font_size)
 
