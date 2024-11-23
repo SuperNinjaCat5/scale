@@ -112,7 +112,7 @@ def get_serial(StringToSend):
 
 
 # Write donation data to a file
-def write_to_file():
+def write_to_file(_):
     ScoutName = scout.get().strip().title()
     ScoutTypeDisplay = ScoutType.get().strip()
     weight_to_file = weight_to_display.get().rstrip(" lbs.")
@@ -211,6 +211,10 @@ def adjust_font_size(event=None):
         r2.configure(font=("Helvetica", new_font_size // 2))
         r3.configure(font=("Helvetica", new_font_size // 2))
 
+
+
+BELOW MADE IT SO THAT YOU CAN ONLY USE ENTER TO SAVE, FIX IT
+NameEntry.bind("<Return>", write_to_file)
 
 # Update weight dynamically only if it changes
 last_weight = None  # Store the last weight
