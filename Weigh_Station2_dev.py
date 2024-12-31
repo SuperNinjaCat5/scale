@@ -1,19 +1,20 @@
+# type: ignore
 import tkinter as tk
 import random
 import datetime
 import customtkinter
-from CTkMessagebox import CTkMessagebox
+from CTkMessagebox import CTkMessagebox 
 import serial
 from PIL import Image
 
 
-SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
+#SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
 #SERIALPORT = "/dev/ttyACM0"  #Dummy Sparfun Open Scale on Arduino
 
 BAUDRATE = 9600
 
 filename="./Food_Pantry_Donations.csv"
-ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1) #Real scale
+#ser = serial.Serial(SERIALPORT, BAUDRATE, timeout =1) #Real scale
 
 open(filename, "a")
 
@@ -213,7 +214,7 @@ def adjust_font_size(event=None):
 
 
 
-BELOW MADE IT SO THAT YOU CAN ONLY USE ENTER TO SAVE, FIX IT
+LINE BELOW MADE IT SO THAT YOU CAN ONLY USE ENTER TO SAVE, FIX IT
 NameEntry.bind("<Return>", write_to_file)
 
 # Update weight dynamically only if it changes
