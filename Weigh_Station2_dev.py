@@ -1,11 +1,10 @@
 # type: ignore
 import tkinter as tk
-import random
 import datetime
 import customtkinter
 from CTkMessagebox import CTkMessagebox 
 import serial
-from PIL import Image
+from PIL import Image, ImageTk
 
 
 #SERIALPORT = "/dev/ttyUSB0"  #Real Sparfun Open Scale
@@ -107,7 +106,9 @@ def get_serial(StringToSend):
         print (split_input_string[0])
 
 # Simulated scale data for testing
-# def get_serial(StringToSend):  # Dummy scale
+# import random
+# def get_serial(StringToSend):
+#   # Dummy scale
 #     weight = random.randint(0, 200)
 #     return weight
 
@@ -214,7 +215,7 @@ def adjust_font_size(event=None):
 
 
 
-LINE BELOW MADE IT SO THAT YOU CAN ONLY USE ENTER TO SAVE, FIX IT
+# LINE BELOW MADE IT SO THAT YOU CAN ONLY USE ENTER TO SAVE, FIX IT
 NameEntry.bind("<Return>", write_to_file)
 
 # Update weight dynamically only if it changes
